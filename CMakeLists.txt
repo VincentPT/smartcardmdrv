@@ -6,6 +6,8 @@ SET (PROJECT_SOURCE_FILES
 	DllMain.c
 	smartcardmdrv.c
 	unimplemented.c
+	trace.c
+	trace.h
 )
 
 # Cryptographic Provider Development Kit installed path

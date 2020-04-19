@@ -5,6 +5,8 @@
 #include <Windows.h>
 #include <cardmod.h>
 
+#include "trace.h"
+
 DWORD CreateContext(__in PCARD_DATA pCardData, __in DWORD dwFlags) {
 	return 0;
 }
@@ -28,17 +30,17 @@ DWORD WINAPI CardAcquireContext(
 	DWORD dwReturn = 0;	
 	__try
 	{
-		//Trace(WINEVENT_LEVEL_VERBOSE, L"Enter");
+		Trace(WINEVENT_LEVEL_VERBOSE, L"Enter");
 		if ( pCardData == NULL )
 		{
-			//Trace(WINEVENT_LEVEL_ERROR, L"pCardData == NULL");
+			Trace(WINEVENT_LEVEL_ERROR, L"pCardData == NULL");
 			dwReturn  = SCARD_E_INVALID_PARAMETER;
 			__leave;
 		}
 
 		if ( dwFlags != 0 )
 		{
-			//Trace(WINEVENT_LEVEL_ERROR, L"dwFlags != 0");
+			Trace(WINEVENT_LEVEL_ERROR, L"dwFlags != 0");
 			dwReturn  = SCARD_E_INVALID_PARAMETER;
 			__leave;
 		}
@@ -113,7 +115,7 @@ DWORD WINAPI CardAcquireContext(
 			CleanContext(pCardData);
 		}
 	}
-	//Trace(WINEVENT_LEVEL_VERBOSE, L"dwReturn = 0x%08X",dwReturn);
+	Trace(WINEVENT_LEVEL_VERBOSE, L"dwReturn = 0x%08X",dwReturn);
 	return dwReturn;
 }
 
@@ -127,8 +129,8 @@ DWORD WINAPI CardDeleteContext(
      )
 {
 	DWORD dwReturn;
-	//Trace(WINEVENT_LEVEL_VERBOSE, L"Enter");
+	Trace(WINEVENT_LEVEL_VERBOSE, L"Enter");
 	dwReturn = CleanContext(pCardData);
-	//Trace(WINEVENT_LEVEL_VERBOSE, L"dwReturn = 0x%08X",dwReturn);
+	Trace(WINEVENT_LEVEL_VERBOSE, L"dwReturn = 0x%08X",dwReturn);
 	return dwReturn;
 }
